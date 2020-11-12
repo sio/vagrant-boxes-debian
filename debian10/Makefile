@@ -10,8 +10,9 @@ export VAGRANT_CLOUD_TOKEN
 
 
 .PHONY: create
-create: login
+create:
 	$(VAGRANT) cloud auth login --check
+	$(VAGRANT) cloud box show "$(VAGRANT_CLOUD_OUTPUT)" || \
 	$(VAGRANT) cloud box create "$(VAGRANT_CLOUD_OUTPUT)"
 
 
