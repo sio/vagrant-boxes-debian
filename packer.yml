@@ -19,8 +19,18 @@ provisioners:
   - type: shell
     inline:
       - export DEBIAN_FRONTEND=noninteractive
+      - export UCF_FORCE_CONFFOLD=YES  # skip grub-pc configuration
+      - echo "d-i grub-pc/install_devices_empty boolean true" | sudo debconf-set-selections
       - sudo apt-get update
-      - sudo apt-get -y -o 'Dpkg::Options::=--force-confnew --force-confdef' full-upgrade
+      - sudo apt-get -y
+        -o 'Dpkg::Options::=--force-confnew'
+        -o 'Dpkg::Optins::=--force-confdef'
+        upgrade
+      - sudo apt-get -y
+        -o 'Dpkg::Options::=--force-confnew'
+        -o 'Dpkg::Optins::=--force-confdef'
+        full-upgrade
+      - sudo apt-get --purge autoremove
       - sudo apt-get clean
 
 post-processors:
