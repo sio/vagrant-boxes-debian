@@ -1,0 +1,27 @@
+description: |
+  Apply all updates to upstream Debian box
+
+min_packer_version: "1.3.2"  # disk_detect_zeroes
+
+variables:
+  provider: libvirt
+  upstream_box: debian/buster
+  publish_box: potyarkin/debian10
+  publish_version: 'v{{ isotime "20060102_1504" }}'
+
+builders:
+  - type: vagrant
+    source_path: '{{ user `upstream_box` }}'
+    provider: '{{ user `provider` }}'
+
+provisioners:
+  - type: shell
+    inline:
+      - sudo apt-get update
+      - sudo apt-get -y full-upgrade
+      - sudo apt-get clean
+
+post-processors:
+  - type: vagrant-cloud
+    box_tag: '{{ user `publish_box` }}'
+    version: '{{ user `publish_version` }}'

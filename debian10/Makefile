@@ -7,6 +7,7 @@ VAGRANT?=vagrant
 
 
 export VAGRANT_CLOUD_TOKEN
+PACKER_FLAGS+=-var upstream_box="$(VAGRANT_CLOUD_INPUT)" -var publish_box="$(VAGRANT_CLOUD_OUTPUT)"
 
 
 .PHONY: create
@@ -18,8 +19,7 @@ create:
 
 debian10: VAGRANT_CLOUD_INPUT=debian/buster
 debian10: VAGRANT_CLOUD_OUTPUT=potyarkin/debian10
-debian10: create
-
+debian10: create build
 
 
 include Makefile.packer
