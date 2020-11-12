@@ -7,7 +7,7 @@ variables:
   provider: libvirt
   input_box: debian/buster64
   output_box: potyarkin/debian10
-  output_version: 'v{{ isotime "20060102_1504" }}'
+  output_version: '{{ isotime "20060102.1504" }}'
 
 builders:
   - type: vagrant
