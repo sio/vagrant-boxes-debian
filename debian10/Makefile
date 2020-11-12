@@ -16,7 +16,7 @@ login:
 
 .PHONY: create
 create: login
-	$(VAGRANT) cloud login --check
+	$(VAGRANT) cloud auth login --check
 	$(VAGRANT) cloud box create "$(VAGRANT_CLOUD_OUTPUT)"
 
 
