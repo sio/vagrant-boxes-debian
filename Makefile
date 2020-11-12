@@ -10,6 +10,11 @@ export VAGRANT_CLOUD_TOKEN
 PACKER_FLAGS+=-var input_box="$(VAGRANT_CLOUD_INPUT)" -var output_box="$(VAGRANT_CLOUD_OUTPUT)"
 
 
+ifdef DEBUG
+export PACKER_LOG=1
+endif
+
+
 .PHONY: create
 create:
 	$(VAGRANT) cloud auth login --check
