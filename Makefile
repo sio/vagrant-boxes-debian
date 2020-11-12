@@ -7,7 +7,7 @@ VAGRANT?=vagrant
 
 
 export VAGRANT_CLOUD_TOKEN
-PACKER_FLAGS+=-var upstream_box="$(VAGRANT_CLOUD_INPUT)" -var publish_box="$(VAGRANT_CLOUD_OUTPUT)"
+PACKER_FLAGS+=-var input_box="$(VAGRANT_CLOUD_INPUT)" -var output_box="$(VAGRANT_CLOUD_OUTPUT)"
 
 
 .PHONY: create
