@@ -22,7 +22,7 @@ create:
 	$(VAGRANT) cloud box create "$(VAGRANT_CLOUD_OUTPUT)"
 
 
-debian10: VAGRANT_CLOUD_INPUT=debian/buster
+debian10: VAGRANT_CLOUD_INPUT=debian/buster64
 debian10: VAGRANT_CLOUD_OUTPUT=potyarkin/debian10
 debian10: create build
 
