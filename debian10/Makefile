@@ -9,11 +9,6 @@ VAGRANT?=vagrant
 export VAGRANT_CLOUD_TOKEN
 
 
-.PHONY: login
-login:
-	$(VAGRANT) cloud auth login --token "$$VAGRANT_CLOUD_TOKEN"
-
-
 .PHONY: create
 create: login
 	$(VAGRANT) cloud auth login --check
