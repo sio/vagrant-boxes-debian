@@ -6,8 +6,11 @@ VAGRANT_CLOUD_INPUT?=
 VAGRANT?=vagrant
 
 
+export VAGRANT_CLOUD_TOKEN
+
+
 .PHONY: login
-login: export VAGRANT_CLOUD_TOKEN
+login:
 	$(VAGRANT) cloud auth login --token "$$VAGRANT_CLOUD_TOKEN"
 
 
@@ -15,9 +18,6 @@ login: export VAGRANT_CLOUD_TOKEN
 create: login
 	$(VAGRANT) cloud login --check
 	$(VAGRANT) cloud box create "$(VAGRANT_CLOUD_OUTPUT)"
-
-
-build: export VAGRANT_CLOUD_TOKEN
 
 
 include Makefile.packer
