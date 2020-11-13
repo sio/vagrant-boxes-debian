@@ -3,6 +3,7 @@ FROM potyarkin/molecule:host-kvm
 RUN apt-get -y install --no-install-recommends \
         gnupg2 \
         libguestfs-tools \
+        linux-image-amd64 \
         lsb-release \
         python3-yaml \
         software-properties-common \
