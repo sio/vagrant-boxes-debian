@@ -27,6 +27,11 @@ debian10: VAGRANT_CLOUD_OUTPUT=potyarkin/debian10
 debian10: create build
 
 
+debian11: VAGRANT_CLOUD_INPUT=debian/testing64
+debian11: VAGRANT_CLOUD_OUTPUT=potyarkin/debian11
+debian11: create build
+
+
 include Makefile.packer
 Makefile.packer:
 	curl -o $@ -L "https://gitlab.com/sio/server_common/-/raw/master/packer/Makefile.packer"
