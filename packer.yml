@@ -25,17 +25,14 @@ provisioners:
       - export UCF_FORCE_CONFFNEW=YES
       - echo "grub-pc grub-pc/install_devices_empty boolean true" | debconf-set-selections
       - echo "base-passwd base-passwd/user-change-home boolean true" | debconf-set-selections
-      - echo "base-passwd base-passwd/user-change-home seen true" | debconf-set-selections
 
       # Upgrade all packages
       - apt-get update
       - apt-get -fy
         -o 'Dpkg::Options::=--force-confnew'
-        -o 'Dpkg::Optins::=--force-confdef'
         upgrade
       - apt-get -fy
         -o 'Dpkg::Options::=--force-confnew'
-        -o 'Dpkg::Optins::=--force-confdef'
         full-upgrade
       - apt-get --purge autoremove
       - apt-get clean
