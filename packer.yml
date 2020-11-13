@@ -16,6 +16,10 @@ builders:
     communicator: ssh
 
 provisioners:
+  - type: file
+    source: hostkeys.service
+    destination: /etc/systemd/system/hostkeys.service
+
   - type: shell
     execute_command: "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }}"
     inline:

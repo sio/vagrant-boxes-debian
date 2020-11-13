@@ -1,0 +1,11 @@
+[Unit]
+Description=Generate SSH host keys
+Before=sshd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ssh-keygen -A -v
+ExecStartPost=/bin/systemctl disable hostkeys.service
+
+[Install]
+WantedBy=multi-user.target
