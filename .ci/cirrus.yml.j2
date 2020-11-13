@@ -1,0 +1,16 @@
+task:
+  name: packer-vagrant-build
+  container:
+    image:
+    kvm: true
+  env:
+    ACTION: "{{ ACTION }}"
+    DEBUG: 1
+
+    CLONE_SHA: "{{ GITHUB_SHA }}"
+    CLONE_URL: "{{ GITHUB_SERVER_URL }}/{{ GITHUB_REPOSITORY }}.git"
+  clone_script:
+    - git clone "$CLONE_URL" .
+    - git reset --hard "$CLONE_SHA"
+  packer_script:
+    - make "$ACTION"

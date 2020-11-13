@@ -1,0 +1,26 @@
+name: ci/environment
+
+on:
+  push:
+    branches:
+      - docker
+      - master
+    paths:
+      - .ci/Makefile
+      - .ci/*.Dockerfile
+  schedule:
+    - cron: '23 6 3,18 * *'
+
+jobs:
+  docker-build:
+    name: build-${{ matrix.tag }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - ci-env
+    env:
+      DOCKER_REGISTRY_PASSWD: ${{ secrets.CONTAINER_REGISTRY_PERSONAL_ACCESS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v1
+      - run: make -C .ci ${{ matrix.tag }}
