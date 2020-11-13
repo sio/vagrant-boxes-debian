@@ -22,6 +22,7 @@ provisioners:
       - export DEBIAN_FRONTEND=noninteractive
       - echo "grub-pc grub-pc/install_devices_empty boolean true" | sudo debconf-set-selections
       - echo "base-passwd base-passwd/user-change-home boolean true" | sudo debconf-set-selections
+      - echo "base-passwd base-passwd/user-change-home seen true" | sudo debconf-set-selections
 
       # Upgrade all packages
       - sudo apt-get update
