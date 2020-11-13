@@ -20,8 +20,8 @@ provisioners:
     inline:
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
-      - echo "d-i grub-pc/install_devices_empty boolean true" | sudo debconf-set-selections
-      - echo "d-i base-passwd/user-change-home boolean true" | sudo debconf-set-selections
+      - echo "grub-pc grub-pc/install_devices_empty boolean true" | sudo debconf-set-selections
+      - echo "base-passwd base-passwd/user-change-home boolean true" | sudo debconf-set-selections
 
       # Upgrade all packages
       - sudo apt-get update
