@@ -24,7 +24,9 @@ provisioners:
     execute_command: "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }}"
     inline:
       # Install hostkeys.service
-      - mv /tmp/hostkeys.service /etc/systemd/system/hostkeys.service
+      - mv /tmp/hostkeys.service /lib/systemd/system/hostkeys.service
+      - ln -s /lib/systemd/system/hostkeys.service /etc/systemd/system/hostkeys.service
+      - ln -s /etc/systemd/system/hostkeys.service /etc/systemd/system/multi-user.target.wants/hostkeys.service
 
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
