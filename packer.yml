@@ -18,11 +18,14 @@ builders:
 provisioners:
   - type: file
     source: hostkeys.service
-    destination: /etc/systemd/system/hostkeys.service
+    destination: /tmp/hostkeys.service
 
   - type: shell
     execute_command: "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }}"
     inline:
+      # Install hostkeys.service
+      - mv /tmp/hostkeys.service /etc/systemd/system/hostkeys.service
+
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
       - echo "grub-pc grub-pc/install_devices_empty boolean true" | debconf-set-selections
