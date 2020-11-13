@@ -1,7 +1,7 @@
 task:
   name: packer-vagrant-build
   container:
-    image:
+    image: 'ghcr.io/sio/vagrant-boxes-debian:ci-env'
     kvm: true
   env:
     ACTION: "{{ ACTION }}"

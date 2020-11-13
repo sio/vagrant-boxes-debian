@@ -2,7 +2,7 @@ DOCKER?=docker
 DOCKER_REGISTRY?=ghcr.io
 DOCKER_REGISTRY_PASSWD?=
 DOCKER_USER?=sio
-DOCKER_REPO?=sio/vagrant-boxes-debian
+DOCKER_REPO?=ghcr.io/sio/vagrant-boxes-debian
 
 
 DOCKERFILES=$(wildcard *.Dockerfile)
