@@ -9,4 +9,5 @@ Debian base boxes
 
 - TODO: check box size; why updated boxes 2x larger?
 - TODO: autoremove old kernels
+- TODO: lookup randomness generation, hostkeys generation gets stuck in VM until login
 - TODO: configure CI to use these boxes
