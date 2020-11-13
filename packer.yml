@@ -21,8 +21,6 @@ provisioners:
     inline:
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
-      - unset  UCF_FORCE_CONFFOLD
-      - export UCF_FORCE_CONFFNEW=YES
       - echo "grub-pc grub-pc/install_devices_empty boolean true" | debconf-set-selections
       - echo "base-passwd base-passwd/user-change-home boolean true" | debconf-set-selections
 
