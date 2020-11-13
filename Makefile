@@ -13,7 +13,7 @@ PACKER_FLAGS+=-var input_box="$(VAGRANT_CLOUD_INPUT)" -var output_box="$(VAGRANT
 ifdef DEBUG
 export PACKER_LOG=1
 export LIBGUESTFS_DEBUG=1
-export LIBGUESTFS_TRACE=1
+#export LIBGUESTFS_TRACE=1
 endif
 
 
