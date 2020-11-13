@@ -8,4 +8,5 @@ Debian base boxes
 ## TODO
 
 - TODO: check box size; why updated boxes 2x larger?
+- TODO: autoremove old kernels
 - TODO: configure CI to use these boxes
