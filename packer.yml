@@ -18,9 +18,12 @@ builders:
 provisioners:
   - type: shell
     inline:
+      # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
-      - export UCF_FORCE_CONFFOLD=YES  # skip grub-pc configuration
       - echo "d-i grub-pc/install_devices_empty boolean true" | sudo debconf-set-selections
+      - echo "d-i base-passwd/user-change-home boolean true" | sudo debconf-set-selections
+
+      # Upgrade all packages
       - sudo apt-get update
       - sudo apt-get -y
         -o 'Dpkg::Options::=--force-confnew'
