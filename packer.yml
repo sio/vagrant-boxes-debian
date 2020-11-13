@@ -17,7 +17,7 @@ builders:
 
 provisioners:
   - type: shell
-    privileged: true  # use sudo for the whole script
+    execute_command: "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }}"
     inline:
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
