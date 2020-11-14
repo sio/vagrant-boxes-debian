@@ -45,6 +45,11 @@ provisioners:
                 full-upgrade
       - apt-get -fy --no-install-recommends
                 --purge autoremove
+
+      # Entropy: https://wiki.debian.org/BoottimeEntropyStarvation
+      - apt-get -y --no-install-recommends install haveged
+
+      # Clean up
       - apt-get clean
       - rm -rf /var/lib/apt/lists/*
 
