@@ -4,6 +4,7 @@ VAGRANT_CLOUD_INPUT?=
 
 
 VAGRANT?=vagrant
+PY?=python3
 
 
 export VAGRANT_CLOUD_TOKEN
@@ -24,14 +25,19 @@ create:
 	$(VAGRANT) cloud box create "$(VAGRANT_CLOUD_OUTPUT)"
 
 
+.PHONY: prune
+prune: build
+	$(PY) vagrant_cloud_prune.py $(VAGRANT_CLOUD_OUTPUT) 10
+
+
 debian10: VAGRANT_CLOUD_INPUT=debian/buster64
 debian10: VAGRANT_CLOUD_OUTPUT=potyarkin/debian10
-debian10: create build
+debian10: create build prune
 
 
 debian11: VAGRANT_CLOUD_INPUT=debian/testing64
 debian11: VAGRANT_CLOUD_OUTPUT=potyarkin/debian11
-debian11: create build
+debian11: create build prune
 
 
 include Makefile.packer
