@@ -81,7 +81,7 @@ def main():
     args = parse_args()
     for idx, release in enumerate(sorted(
             box_info(args.box)['versions'],
-            key=lambda v: datetime.fromisoformat(v['created_at']),
+            key=lambda v: datetime.fromisoformat(v['created_at'].replace('Z', '+00:00')),
             reverse=True,
     )):
         if idx >= args.keep:
