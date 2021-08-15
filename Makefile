@@ -35,7 +35,7 @@ debian10: VAGRANT_CLOUD_OUTPUT=potyarkin/debian10
 debian10: create build prune
 
 
-debian11: VAGRANT_CLOUD_INPUT=debian/testing64
+debian11: VAGRANT_CLOUD_INPUT=debian/bullseye64
 debian11: VAGRANT_CLOUD_OUTPUT=potyarkin/debian11
 debian11: create build prune
 
