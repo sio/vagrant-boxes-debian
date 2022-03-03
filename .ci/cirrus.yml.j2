@@ -7,6 +7,7 @@ task:
     ACTION: "{{ ACTION }}"
     VAGRANT_CLOUD_TOKEN: "ENCRYPTED[134890f26c6768596a109b0da5826d0296c5591e8fdfcb94df7a2ce9c864d000caaf712f2dcec942cb01f3f2ea1d62c9]"
     DEBUG: 1
+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu
 
     CLONE_SHA: "{{ GITHUB_SHA }}"
     CLONE_URL: "{{ GITHUB_SERVER_URL }}/{{ GITHUB_REPOSITORY }}.git"
@@ -19,6 +20,16 @@ task:
     - /usr/sbin/virtlogd
   libvirtd_background_script:
     - sleep 2 && /usr/sbin/libvirtd
+
+  # Workaround for cgroups v2
+  # I have no idea why or how this works (see commit message for a longer rant)
+  cgroups_workaround_script:
+    - mkdir -p "$CGROUP_WORKAROUND"
+    - ls -lF "$CGROUP_WORKAROUND"
+    - bash -c 'echo $$ > /tmp/cgroups_workaround.pid; sleep infinity' &
+    - sleep 1
+    - cat /tmp/cgroups_workaround.pid >> $CGROUP_WORKAROUND/cgroup.procs
+    - cat $CGROUP_WORKAROUND/cgroup.procs
 
   # Actual work is done here
   clone_script:
