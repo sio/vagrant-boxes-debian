@@ -18,6 +18,7 @@ jobs:
         tag:
           - debian10
           - debian11
+          - debian12
     env:
       CIRRUS_API_TOKEN: ${{ secrets.CIRRUS_API_TOKEN }}
       CIRRUS_GITHUB_REPO: sio/.cirrus-ci-jobs

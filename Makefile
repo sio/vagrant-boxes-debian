@@ -40,6 +40,11 @@ debian11: VAGRANT_CLOUD_OUTPUT=potyarkin/debian11
 debian11: create build prune
 
 
+debian12: VAGRANT_CLOUD_INPUT=debian/testing64
+debian12: VAGRANT_CLOUD_OUTPUT=potyarkin/debian12
+debian12: create build prune
+
+
 include Makefile.packer
 Makefile.packer:
 	curl -o $@ -L "https://gitlab.com/sio/server_common/-/raw/master/packer/Makefile.packer"
