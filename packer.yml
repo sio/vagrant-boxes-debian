@@ -49,7 +49,7 @@ builders:
 
 provisioners:
   - type: file
-    source: hostkeys.service
+    source: systemd/hostkeys.service
     destination: /tmp/hostkeys.service
 
   - type: shell
