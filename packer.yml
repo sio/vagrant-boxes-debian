@@ -52,6 +52,10 @@ provisioners:
     source: systemd/hostkeys.service
     destination: /tmp/hostkeys.service
 
+  - type: file
+    source: systemd/ethernet.network
+    destination: /tmp/ethernet.network
+
   - type: shell
     execute_command: "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }}"
     inline:
@@ -59,6 +63,12 @@ provisioners:
       - mv /tmp/hostkeys.service /lib/systemd/system/hostkeys.service
       - ln -s /lib/systemd/system/hostkeys.service /etc/systemd/system/hostkeys.service
       - ln -s /etc/systemd/system/hostkeys.service /etc/systemd/system/multi-user.target.wants/hostkeys.service
+
+      # Configure network (DHCP)
+      - mv /tmp/ethernet.network /etc/systemd/network/20-ethernet.network
+
+      # Allow old INSECURE ssh ciphers (still used by Vagrant sometimes)
+      - echo "HostKeyAlgorithms +ssh-rsa\nPubkeyAcceptedAlgorithms +ssh-rsa" >> /etc/ssh/sshd_config
 
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
