@@ -85,9 +85,9 @@ provisioners:
       - apt-get clean
 
 post-processors:
-  - type: vagrant
-    provider_override: '{{ user `output_provider` }}'
-    vagrantfile_template: Vagrantfile.template
-  - type: vagrant-cloud
-    box_tag: '{{ user `output_box` }}'
-    version: '{{ user `output_version` }}'
+  - - type: vagrant
+      vagrantfile_template: Vagrantfile.template
+      compression_level: 9
+    - type: vagrant-cloud
+      box_tag: '{{ user `output_box` }}'
+      version: '{{ user `output_version` }}'
