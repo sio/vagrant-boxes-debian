@@ -1,19 +1,50 @@
 description: |
-  Apply all updates to upstream Debian box
+  Create a Vagrant box from Debian cloud image and apply all updates
 
 min_packer_version: "1.3.2"  # disk_detect_zeroes
 
 variables:
-  provider: libvirt
-  input_box: debian/buster64
-  output_box: potyarkin/debian10
+  output_provider: 'libvirt'
+  output_box: 'potyarkin/debian{{ user `debian_release` }}'
   output_version: '{{ isotime "20060102.1504" }}'
+  debian_codename: 'bullseye'
+  debian_release: '11'
 
 builders:
-  - type: vagrant
-    source_path: '{{ user `input_box` }}'
-    provider: '{{ user `provider` }}'
-    communicator: ssh
+  - type: qemu
+    output_directory: output
+    vm_name: debian.qcow2
+    disk_size: 8000
+
+    iso_url: "\
+      https://cdimage.debian.org/cdimage/cloud/\
+      {{ user `debian_codename` }}\
+      /daily/latest/\
+      debian-{{ user `debian_release` }}-generic-amd64-daily.qcow2"
+    iso_checksum: "file:\
+      https://cdimage.debian.org/cdimage/cloud/\
+      {{ user `debian_codename` }}\
+      /daily/latest/SHA512SUMS"
+    disk_image: yes  # iso_url is pointing to a disk image instead of ISO
+    format: qcow2
+
+    accelerator: kvm
+    memory: 2048
+    cpus: 2
+    headless: yes
+
+    http_directory: .
+    qemuargs:
+      - ['-smbios', 'type=1,serial=ds=nocloud-net;seedfrom=http://{{ .HTTPIP }}:{{ .HTTPPort }}/cloud-init/']
+      - ['-serial', 'mon:telnet:127.0.0.1:2121,server,nowait']
+    ssh_username: vagrant
+    ssh_password: vagrant
+    ssh_timeout: 30m
+
+    disk_compression: yes
+    skip_compaction: no
+    disk_discard: unmap
+    disk_detect_zeroes: unmap
 
 provisioners:
   - type: file
