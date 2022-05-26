@@ -84,6 +84,8 @@ provisioners:
       - apt-get clean
 
 post-processors:
+  - type: vagrant
+    provider_override: '{{ user `output_provider` }}'
   - type: vagrant-cloud
     box_tag: '{{ user `output_box` }}'
     version: '{{ user `output_version` }}'
