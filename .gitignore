@@ -1,2 +1,6 @@
 Makefile.packer
 Makefile.venv
+/packer_cache/
+/output/
+/packer.json
+*.box
