@@ -1,11 +1,14 @@
-# Upstream Debian Vagrant boxes with all package updates applied
+# Vagrant boxes for Debian with latest package updates
 
-Upstream boxes are updated very rarely and at most times many updates are
-pending. Applying those updates once is beneficial for repeated CI runs using
-Debian base boxes
+Upstream Vagrant [boxes][upstream-vagrant-boxes] for Debian are updated very
+rarely, and sometimes remain broken for a long time.
 
+In this repo I build vanilla Debian boxes from upstream [cloud images] which are
+updated a lot more frequently and have never been in a broken state due to
+better CI/CD process.
 
-## TODO
+The resulting boxes are published at Vagrant Cloud as [potyarkin/debian…]
 
-- TODO: check box size; why updated boxes 2x larger?
-- TODO: autoremove old kernels
+[upstream-vagrant-boxes]: https://app.vagrantup.com/debian
+[cloud images]: https://cdimage.debian.org/cdimage/cloud/
+[potyarkin/debian…]: https://app.vagrantup.com/potyarkin
