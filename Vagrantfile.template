@@ -1,0 +1,4 @@
+Vagrant.configure("2") do |config|
+  config.nfs.verify_installed = false
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+end

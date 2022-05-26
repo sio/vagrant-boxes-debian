@@ -87,6 +87,7 @@ provisioners:
 post-processors:
   - type: vagrant
     provider_override: '{{ user `output_provider` }}'
+    vagrantfile_template: Vagrantfile.template
   - type: vagrant-cloud
     box_tag: '{{ user `output_box` }}'
     version: '{{ user `output_version` }}'
