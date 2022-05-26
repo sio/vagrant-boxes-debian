@@ -68,7 +68,9 @@ provisioners:
       - mv /tmp/ethernet.network /etc/systemd/network/20-ethernet.network
 
       # Allow old INSECURE ssh ciphers (still used by Vagrant sometimes)
-      - echo "HostKeyAlgorithms +ssh-rsa\nPubkeyAcceptedAlgorithms +ssh-rsa" >> /etc/ssh/sshd_config
+      - echo "HostKeyAlgorithms +ssh-rsa" >> /etc/ssh/sshd_config
+      - grep -iE 'buster|bullseye' /etc/*release* ||
+        echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> /etc/ssh/sshd_config
 
       # Non interactive mode
       - export DEBIAN_FRONTEND=noninteractive
