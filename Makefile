@@ -1,6 +1,6 @@
 VAGRANT_CLOUD_TOKEN?=
-VAGRANT_CLOUD_OUTPUT?=
-VAGRANT_CLOUD_INPUT?=
+export VAGRANT_CLOUD_TOKEN
+VAGRANT_CLOUD_OUTPUT?=potyarkin/debian$(DEBIAN_RELEASE)
 
 
 VAGRANT?=vagrant
@@ -12,8 +12,12 @@ Makefile.packer:
 	curl -o $@ -L "https://gitlab.com/sio/server_common/-/raw/master/packer/Makefile.packer"
 
 
-export VAGRANT_CLOUD_TOKEN
-PACKER_FLAGS+=-var input_box="$(VAGRANT_CLOUD_INPUT)" -var output_box="$(VAGRANT_CLOUD_OUTPUT)"
+DEBIAN_CODENAME=$(firstword $(subst /, ,$(DEBIAN)))
+DEBIAN_RELEASE=$(lastword $(subst /, ,$(DEBIAN)))
+PACKER_FLAGS+=\
+  -var output_box="$(VAGRANT_CLOUD_OUTPUT)"\
+  -var debian_codename="$(DEBIAN_CODENAME)"\
+  -var debian_release="$(DEBIAN_RELEASE)"
 
 
 PACKER_ARTIFACTS+=output
@@ -38,16 +42,13 @@ prune: build
 	$(PY) vagrant_cloud_prune.py $(VAGRANT_CLOUD_OUTPUT) 10
 
 
-debian10: VAGRANT_CLOUD_INPUT=debian/buster64
-debian10: VAGRANT_CLOUD_OUTPUT=potyarkin/debian10
+debian10: DEBIAN=buster/10
 debian10: create build prune
 
 
-debian11: VAGRANT_CLOUD_INPUT=debian/bullseye64
-debian11: VAGRANT_CLOUD_OUTPUT=potyarkin/debian11
+debian11: DEBIAN=bullseye/11
 debian11: create build prune
 
 
-debian12: VAGRANT_CLOUD_INPUT=debian/testing64
-debian12: VAGRANT_CLOUD_OUTPUT=potyarkin/debian12
+debian12: DEBIAN=bookworm/12
 debian12: create build prune
