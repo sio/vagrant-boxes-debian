@@ -41,6 +41,7 @@ builders:
     ssh_password: vagrant
     ssh_timeout: 30m
 
+    shutdown_command: sudo shutdown -P now
     disk_compression: yes
     skip_compaction: no
     disk_discard: unmap
