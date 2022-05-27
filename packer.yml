@@ -98,7 +98,7 @@ provisioners:
 
 post-processors:
   - - type: vagrant
-      vagrantfile_template: Vagrantfile.template
+      vagrantfile_template: vagrant/Vagrantfile.template
       compression_level: 9
     - type: vagrant-cloud
       box_tag: '{{ user `output_box` }}'

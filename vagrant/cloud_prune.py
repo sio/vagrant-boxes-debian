@@ -10,7 +10,7 @@ from datetime import datetime
 from urllib.request import urlopen, Request
 
 
-USER_AGENT = 'vagrant_cloud_prune.py <https://github.com/sio/vagrant-boxes-debian>'
+USER_AGENT = 'vagrant/cloud_prune.py <https://github.com/sio/vagrant-boxes-debian>'
 
 API_ROOT = 'https://app.vagrantup.com/api/v1'
 API_BOX_URL = '{API_ROOT}/box/{box}'

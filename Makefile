@@ -39,7 +39,7 @@ create:
 
 .PHONY: prune
 prune: build
-	$(PY) vagrant_cloud_prune.py $(VAGRANT_CLOUD_OUTPUT) 10
+	$(PY) vagrant/cloud_prune.py $(VAGRANT_CLOUD_OUTPUT) 10
 
 
 debian10: DEBIAN=buster/10
