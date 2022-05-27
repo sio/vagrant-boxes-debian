@@ -37,3 +37,6 @@ task:
     - git reset --hard "$CLONE_SHA"
   packer_script:
     - make "$ACTION"
+  always:
+    console_log_script:
+      - cat console.log || true

@@ -36,7 +36,7 @@ builders:
     http_directory: .
     qemuargs:
       - ['-smbios', 'type=1,serial=ds=nocloud-net;seedfrom=http://{{ .HTTPIP }}:{{ .HTTPPort }}/cloud-init/']
-      - ['-serial', 'mon:telnet:127.0.0.1:2121,server,nowait']
+      - ['-serial', 'mon:telnet:127.0.0.1:2121,server,nowait,logfile=console.log,logappend=on']
     ssh_username: vagrant
     ssh_password: vagrant
     ssh_timeout: 30m

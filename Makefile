@@ -20,7 +20,7 @@ PACKER_FLAGS+=\
   -var debian_release="$(DEBIAN_RELEASE)"
 
 
-PACKER_ARTIFACTS+=output
+PACKER_ARTIFACTS+=output console.log
 
 
 ifdef DEBUG
