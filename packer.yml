@@ -65,7 +65,8 @@ provisioners:
       - ln -s /etc/systemd/system/hostkeys.service /etc/systemd/system/multi-user.target.wants/hostkeys.service
 
       # Configure network (DHCP)
-      - mv /tmp/ethernet.network /etc/systemd/network/20-ethernet.network
+      - rm /etc/network/interfaces.d/*-cloud-init || true  # rely on dynamic interface resolution only
+      - mv /tmp/ethernet.network /etc/systemd/network/20-ethernet.network  # bookworm uses systemd-netword by default
 
       # Allow old INSECURE ssh ciphers (still used by Vagrant sometimes)
       - echo "HostKeyAlgorithms +ssh-rsa" >> /etc/ssh/sshd_config
