@@ -95,7 +95,7 @@ provisioners:
 
       # Configure network (DHCP)
       - rm -v /etc/network/interfaces.d/*-cloud-init ||
-        echo 'No interface files found: *-cloud-init'  # rely on dynamic interface resolution only
+        echo 'No interface files found (*-cloud-init)'  # rely on dynamic interface resolution only
       - mv /tmp/ethernet.network /etc/systemd/network/20-ethernet.network  # bookworm uses systemd-netword by default
 
 post-processors:
